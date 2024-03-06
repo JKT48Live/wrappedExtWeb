@@ -1,10 +1,10 @@
 const secretKey = 'JKT48Live';
 let url = window.location.pathname;
 //let data = url.split("/")[2];
-let data = url.replace("/wrappedExtWeb/wrappedExtWeb", "");
+let data = decodeURIComponent(url.replace("/wrappedExtWeb/", ""));
 //let decode = decodeURIComponent(data);
 const decryptedData = CryptoJS.AES.decrypt(data, secretKey).toString(CryptoJS.enc.Utf8);
-let decode = decodeURIComponent(data);
+let decode = decryptedData;
 
 function toggleTopUpVisibility() {
     const topUpElement = document.getElementById('top-up-value');
