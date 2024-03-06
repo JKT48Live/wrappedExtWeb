@@ -1,8 +1,6 @@
 const secretKey = 'JKT48Live';
 let url = window.location.pathname;
-//let data = url.split("/")[2];
 let data = decodeURIComponent(url.replace("/wrappedExtWeb/", ""));
-//let decode = decodeURIComponent(data);
 const decryptedData = CryptoJS.AES.decrypt(data, secretKey).toString(CryptoJS.enc.Utf8);
 let decode = decryptedData;
 
@@ -67,7 +65,7 @@ function createCard(data) {
 
 $(document).ready(function () {
     createCard(decode);
-    setTimeout(() => createCanvasFromCard(), 100);
+    //setTimeout(() => createCanvasFromCard(), 100);
 });
 
 function createCanvasFromCard() {
