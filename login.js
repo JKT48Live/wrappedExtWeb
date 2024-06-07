@@ -31,7 +31,7 @@ function createCard(data) {
     cardBody.innerHTML = `
         <h5 class="card-title text-center poppins-font">JKT48 Wrapped ${data.year} (${data.data.name})</h5><br>
         <center>
-            <img src="${data.data.oshiPic}" width="50%" class="img-fluid rounded-image"><br>
+            <img src="https://www.gak.co.uk/cdn-cgi/image/fit=scale-down,format=jpeg/${data.data.oshiPic}" width="50%" class="img-fluid rounded-image"><br>
             <p class="poppins-font"><b>Oshi:</b> ${data.data.oshi}</p>
         </center><br>
         <div class="row">
