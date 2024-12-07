@@ -29,7 +29,7 @@ function createCard(data) {
     let topSetlists = Array.isArray(data.data.theater.topSetlists) ? ensureThreeEntries([...data.data.theater.topSetlists]) : [data.data.theater.topSetlists];
     let topVCMembers = Array.isArray(data.data.videoCall.topMembers) ? ensureThreeEntries([...data.data.videoCall.topMembers]) : [data.data.videoCall.topMembers];
     cardBody.innerHTML = `
-        <h2 class="card-title text-center jaro-font">JKT48 Wrapped ${data.year}</h2>
+        <h2 class="card-title text-center jaro-font" style="font-size: 60px;">JKT48 Wrapped ${data.year}</h2>
         <h5 class="text-center jaro-font">(${data.data.name})</h5>
         <br>
         <center>
