@@ -29,7 +29,9 @@ function createCard(data) {
     let topSetlists = Array.isArray(data.data.theater.topSetlists) ? ensureThreeEntries([...data.data.theater.topSetlists]) : [data.data.theater.topSetlists];
     let topVCMembers = Array.isArray(data.data.videoCall.topMembers) ? ensureThreeEntries([...data.data.videoCall.topMembers]) : [data.data.videoCall.topMembers];
     cardBody.innerHTML = `
-        <h5 class="card-title text-center poppins-font">JKT48 Wrapped ${data.year} (${data.data.name})</h5><br>
+        <h2 class="card-title text-center jaro-font">JKT48 Wrapped ${data.year}</h2>
+        <h5 class="text-center jaro-font">(${data.data.name})</h5>
+        <br>
         <center>
             <img src="https://www.gak.co.uk/cdn-cgi/image/fit=scale-down,format=jpeg/${data.data.oshiPic}" width="50%" class="img-fluid rounded-image"><br>
             <p class="poppins-font"><b>Oshi:</b> ${data.data.oshi}</p>
