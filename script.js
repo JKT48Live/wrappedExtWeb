@@ -33,8 +33,14 @@ function createCard(data) {
     const cardBody = document.querySelector('.card-body');
     let topSetlists = Array.isArray(data.data.theater.topSetlists) ? ensureThreeEntries([...data.data.theater.topSetlists]) : [data.data.theater.topSetlists];
     let topVCMembers = Array.isArray(data.data.videoCall.topMembers) ? ensureThreeEntries([...data.data.videoCall.topMembers]) : [data.data.videoCall.topMembers];
+    const isAlltime = (isNumeric(data.year)) ? false : true;
+    const selectedYear = (!isAlltime) ? ` ${data.year}` : `<br/>${data.year}`;
+    const yearList = data.data.years;
+    const yrs = Array.isArray(yearList) ? `${yearList[0]} - ${yearList[yearList.length - 1]}` : "";
+    const showYearList = (isAlltime) ? 
+    ` <small style="font-size: 15px; position: relative; top: -5px; display: inline-block;">${yrs}<span style="position: relative; display: block;">(${yearList} thn)</span></small>` : ``;
     cardBody.innerHTML = `
-        <h2 class="card-title text-center jaro-font" style="font-size: 60px;">JKT48 Wrapped${(isNumeric(data.year)) ? ` ${data.year}` : `<br/>${data.year}`}</h2>
+        <h2 class="card-title text-center jaro-font" style="font-size: 60px;">JKT48 Wrapped${selectedYear}${showYearList}</h2>
         <h5 class="text-center jaro-font">(${data.data.name})</h5>
         <br>
         <center>
