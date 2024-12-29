@@ -59,7 +59,7 @@ function createCard(data) {
             ${(data.data.events.lastEvents) ? `
             <b>Last Events:</b><br>${Array.isArray(data.data.events.lastEvents) ? data.data.events.lastEvents.map(event => `- ${event}`).join('<br>') : data.data.events}<br><br>
             ` : data.data.events+"<br><br>"}
-            <b>Total Top-Up:</b><br><span class="total-topup">${data.data.topUp}</span><br><br>
+            <b>Total Top-Up:</b><br><span class="total-topup censored">${data.data.topUp}</span><br><br>
             <center><small><b>#JKT48Wrapped made with ❤️ by JKT48 Live</b></small></center>
         </div>
     `;
