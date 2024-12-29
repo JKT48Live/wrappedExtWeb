@@ -5,7 +5,8 @@ const decryptedData = CryptoJS.AES.decrypt(data, secretKey).toString(CryptoJS.en
 let decode = decryptedData;
 
 function isNumeric(value) {
-    return !isNaN(value) && typeof value === 'number';
+    const parsedValue = parseInt(value, 10);
+    return !isNaN(parsedValue) && value == parsedValue;
 }
 
 function toggleTopUpVisibility() {
