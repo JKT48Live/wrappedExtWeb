@@ -27,6 +27,9 @@
     <style>
       @import url('https://fonts.googleapis.com/css?family=Poppins:700');
 
+      * {
+        color: #fff
+      }
       .img-fluid {
         max-width: 100%;
         height: auto;
@@ -78,7 +81,7 @@
         height: 100vh;
         overflow: auto;
         position: relative;
-        background: #f2ff47;
+        background: #1d2123;
         display: flex;
         align-items: center;
       }
@@ -98,7 +101,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        fill: #12d760;
+        fill: #282b30;
         width: 50vmax;
         z-index: -1;
         animation: move 10s ease-in-out infinite;
@@ -129,6 +132,10 @@
         100% {
           transform: scale(1) translate(10px, -30px);
         }
+      }
+      .censored {
+          filter: blur(8px);
+          user-select: none; /* Mencegah teks disalin */
       }
     </style>
   </head>
