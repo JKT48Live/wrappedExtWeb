@@ -36,9 +36,9 @@ function createCard(data) {
     const isAlltime = (isNumeric(data.year)) ? false : true;
     const selectedYear = (!isAlltime) ? ` ${data.year}` : `<br/>${data.year}`;
     const yearList = data.data.years;
-    const yrs = Array.isArray(yearList) ? `${yearList[0]} - ${yearList[yearList.length - 1]}` : "";
+    const yrs = Array.isArray(yearList) ? `(${yearList[0]} - ${yearList[yearList.length - 1]})` : "";
     const showYearList = (isAlltime) ? 
-    ` <small style="font-size: 15px; position: relative; top: -5px; display: inline-block;">${yrs}<span style="position: relative; display: block;">(${yearList} thn)</span></small>` : ``;
+    ` <small style="font-size: 15px; position: relative; top: -5px; display: inline-block;">${yrs}<span style="position: relative; display: block;">(${yearList.length} thn)</span></small>` : ``;
     cardBody.innerHTML = `
         <h2 class="card-title text-center jaro-font" style="font-size: 60px;">JKT48 Wrapped${selectedYear}${showYearList}</h2>
         <h5 class="text-center jaro-font">(${data.data.name})</h5>
