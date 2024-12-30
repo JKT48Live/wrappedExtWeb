@@ -60,10 +60,10 @@ function createCard(data) {
                 ` : data.data.theater}
             </div>
             <div class="col-md-6">
-                <b>• Video Call</b><br>
+                <b>• Video Call / MnG</b><br>
                 ${(data.data.videoCall.totalTickets) ? `
-                <b>Top Video Call Members:</b><br>${Array.isArray(topVCMembers) ? topVCMembers.join('<br>') : topVCMembers}<br><br>
-                <b>Total Video Call:</b><br>${(data.data.videoCall.totalTickets) ? `${data.data.videoCall.totalTickets} tiket` : data.data.videoCall} 
+                <b>Top Video Call / MnG:</b><br>${Array.isArray(topVCMembers) ? topVCMembers.join('<br>') : topVCMembers}<br><br>
+                <b>Total Video Call / MnG:</b><br>${(data.data.videoCall.totalTickets) ? `${data.data.videoCall.totalTickets} tiket` : data.data.videoCall} 
                 ` : data.data.videoCall}
             </div>
         </div><br>
