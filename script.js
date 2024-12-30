@@ -59,7 +59,7 @@ function createCard(data) {
             <div class="col-md-6 mobile-spacing">
                 <b>🏆 Winrate:</b> ${data.data.theater.winrate.rate}<br>(<b>Menang:</b> ${data.data.theater.winrate.detail.menang}x, <b>Kalah:</b> ${data.data.theater.winrate.detail.kalah}x)
             </div>
-        </div>
+        </div><br>
         <div class="row">
             <div class="col-md-6">
                 <b>• Video Call / MnG</b><br>
