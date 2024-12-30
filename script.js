@@ -33,6 +33,7 @@ function createCard(data) {
     const cardBody = document.querySelector('.card-body');
     let topSetlists = Array.isArray(data.data.theater.topSetlists) ? ensureThreeEntries([...data.data.theater.topSetlists]) : [data.data.theater.topSetlists];
     let topVCMembers = Array.isArray(data.data.videoCall.topMembers) ? ensureThreeEntries([...data.data.videoCall.topMembers]) : [data.data.videoCall.topMembers];
+    let top2SMembers = Array.isArray(data.data.twoShot.topMembers) ? ensureThreeEntries([...data.data.twoShot.topMembers]) : [data.data.twoShot.topMembers];
     const isAlltime = (isNumeric(data.year)) ? false : true;
     const selectedYear = (!isAlltime) ? ` ${data.year}` : `<br/>${data.year}`;
     const yearList = data.data.years;
@@ -53,18 +54,26 @@ function createCard(data) {
             <div class="col-md-6">
                 <b>• Theater</b><br>
                 ${(data.data.theater.topSetlists) ? `
-                <b>Top Setlists:</b><br>${Array.isArray(topSetlists) ? topSetlists.join('<br>') : topSetlists}<br><br>
-                <div class="mobile-spacing">
-                    <b>🏆 Winrate:</b> ${data.data.theater.winrate.rate}<br>(<b>Menang:</b> ${data.data.theater.winrate.detail.menang}x, <b>Kalah:</b> ${data.data.theater.winrate.detail.kalah}x)
-                </div>
-                ` : data.data.theater}
+                <b>Top Setlists:</b><br>${Array.isArray(topSetlists) ? topSetlists.join('<br>') : topSetlists}` : data.data.theater}
             </div>
+            <div class="col-md-6 mobile-spacing">
+                <b>🏆 Winrate:</b> ${data.data.theater.winrate.rate}<br>(<b>Menang:</b> ${data.data.theater.winrate.detail.menang}x, <b>Kalah:</b> ${data.data.theater.winrate.detail.kalah}x)
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
                 <b>• Video Call / MnG</b><br>
                 ${(data.data.videoCall.totalTickets) ? `
                 <b>Top Video Call / MnG:</b><br>${Array.isArray(topVCMembers) ? topVCMembers.join('<br>') : topVCMembers}<br><br>
                 <b>Total Video Call / MnG:</b><br>${(data.data.videoCall.totalTickets) ? `${data.data.videoCall.totalTickets} tiket` : data.data.videoCall} 
                 ` : data.data.videoCall}
+            </div>
+            <div class="col-md-6">
+                <b>• Two Shot / MnG</b><br>
+                ${(data.data.twoShot.totalTickets) ? `
+                <b>Top Two Shot / MnG:</b><br>${Array.isArray(top2SMembers) ? top2SMembers.join('<br>') : top2SMembers}<br><br>
+                <b>Total Two Shot / MnG:</b><br>${(data.data.twoShot.totalTickets) ? `${data.data.twoShot.totalTickets} tiket` : data.data.twoShot} 
+                ` : data.data.twoShot}
             </div>
         </div><br>
         <div class="poppins-font">
