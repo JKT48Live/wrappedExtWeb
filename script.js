@@ -23,7 +23,7 @@ function toggleTopUpVisibility() {
 
 function ensureThreeEntries(array) {
     while (array.length < 3) {
-        array.push("-");
+        array.push("⠀");
     }
     return array;
 }
