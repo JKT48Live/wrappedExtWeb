@@ -68,7 +68,7 @@ function createCard(data) {
                 <b>Total Video Call / MnG:</b><br>${(data.data.videoCall.totalTickets) ? `${data.data.videoCall.totalTickets} tiket` : data.data.videoCall} 
                 ` : data.data.videoCall}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mobile-spacing">
                 <b>• Two Shot / MnG</b><br>
                 ${(data.data.twoShot.totalTickets) ? `
                 <b>Top Two Shot / MnG:</b><br>${Array.isArray(top2SMembers) ? top2SMembers.join('<br>') : top2SMembers}<br><br>
