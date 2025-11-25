@@ -21,59 +21,88 @@ function toggleTopUpVisibility() {
     }
 }
 
-function ensureThreeEntries(array) {
-    while (array.length < 3) {
-        array.push("⠀");
-    }
-    return array;
-}
-
 function createCard(data) {
     data = JSON.parse(data);
     const cardBody = document.querySelector('.card-body');
-    let topSetlists = Array.isArray(data.data.theater.topSetlists) ? ensureThreeEntries([...data.data.theater.topSetlists]) : [data.data.theater.topSetlists];
-    let topVCMembers = Array.isArray(data.data.videoCall.topMembers) ? ensureThreeEntries([...data.data.videoCall.topMembers]) : [data.data.videoCall.topMembers];
-    let top2SMembers = Array.isArray(data.data.twoShot.topMembers) ? ensureThreeEntries([...data.data.twoShot.topMembers]) : [data.data.twoShot.topMembers];
+    let topSetlists = [...(data?.data?.theater?.topSetlists ?? [])];
+    let mostApplied = [...(data?.data?.theater?.mostApplied ?? [])];
+    let topVCMembers = [...(data?.data?.videoCall?.topMembers ?? [])];
+    let top2SMembers = [...(data?.data?.twoShot?.topMembers ?? [])];
     const isAlltime = (isNumeric(data.year)) ? false : true;
     const selectedYear = (!isAlltime) ? ` ${data.year}` : `<br/>${data.year}`;
     const yearList = data.data.years;
     const yrs = Array.isArray(yearList) ? `(${yearList[0]} - ${yearList[yearList.length - 1]})` : "";
-    /*const showYearList = (isAlltime) ? 
-    ` <small style="font-size: 15px; position: relative; top: -5px; display: inline-block;">${yrs}<span style="position: relative; display: block;">(${yearList.length} thn)</span></small>` : ``;*/
     const showYearList = (isAlltime) ? 
-    ` <small style="font-size: 15px; position: relative; top: -20px; display: inline-block;">${yrs}</small>` : ``;
+    ` <small style="font-size: 15px; position: relative; top: -20px; display: inline-block;" class="poppins-font">${yrs}</small>` : ``;
     cardBody.innerHTML = `
-        <h2 class="card-title text-center jaro-font" style="font-size: 60px;">JKT48 Wrapped${selectedYear}${showYearList}</h2>
-        <h5 class="text-center jaro-font">(${data.data.name})</h5>
-        <br>
+        <h2 class="card-title text-center modak-regular" style="font-size: 60px;">JKT48 Wrapped${selectedYear}${showYearList}</h2>
+        <h5 class="text-center poppins-font">[ ${data.data.name} ]</h5><br>
         <center>
-            <img src="https://www.gak.co.uk/cdn-cgi/image/fit=scale-down,format=jpeg/${data.data.oshiPic}" width="50%" class="img-fluid rounded-image"><br>
+            <img src="https://wsrv.nl/?output=png&af&l=6&url=${data.data.oshiPic}" width="50%" class="img-fluid rounded-image"><br>
             <p class="poppins-font"><b>Oshi:</b> ${data.data.oshi}</p>
         </center><br>
-        <div class="row">
-            <div class="col-md-6">
-                <b>• Theater</b><br>
-                ${(data.data.theater.topSetlists) ? `
-                <b>Top Setlists:</b><br>${Array.isArray(topSetlists) ? topSetlists.join('<br>') : topSetlists}` : data.data.theater}
+        <div class="row poppins-font">
+            <!-- Title -->
+            <div class="col-12 text-center mt-3 mobile-spacing">
+                <b>• Theater</b>
             </div>
-            <div class="col-md-6 mobile-spacing">
-                <b>🏆 Winrate:</b> ${data.data.theater.winrate.rate}<br>(<b>Menang:</b> ${data.data.theater.winrate.detail.menang}x, <b>Kalah:</b> ${data.data.theater.winrate.detail.kalah}x)
+
+            <!-- Left Column -->
+            <div class="col-md-6 text-start theater-column">
+                <div>
+                    <b>Top Setlists (Win):</b>
+                </div>
+                <div class="theater-slot">
+                    ${Array.isArray(topSetlists) ? topSetlists.join('<br>') : topSetlists}
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-md-6 text-start theater-column">
+                <div>
+                    <b>Most Applied Setlists:</b>
+                </div>
+                <div class="theater-slot">
+                    ${Array.isArray(mostApplied) ? mostApplied.join('<br>') : mostApplied}
+                </div>
+            </div>
+
+            <!-- Winrate Center -->
+            <div class="col-12 text-center mt-3 mobile-spacing">
+                <div class="winrate-box">
+                    <b>🏆 Winrate:</b> ${data.data.theater.winrate.rate}<br>
+                    (<b>Win:</b> ${data.data.theater.winrate.detail.menang}x, 
+                    <b>Lose:</b> ${data.data.theater.winrate.detail.kalah}x)
+                </div>
             </div>
         </div><br>
-        <div class="row">
-            <div class="col-md-6">
-                <b>• Video Call / MnG</b><br>
-                ${(data.data.videoCall.totalTickets) ? `
-                <b>Top Video Call / MnG:</b><br>${Array.isArray(topVCMembers) ? topVCMembers.join('<br>') : topVCMembers}<br><br>
-                <b>Total Video Call / MnG:</b><br>${(data.data.videoCall.totalTickets) ? `${data.data.videoCall.totalTickets} tiket` : data.data.videoCall} 
-                ` : data.data.videoCall}
+        <div class="row poppins-font">
+            <div class="col-md-6 mng-column">
+                <div class="slot-title">
+                    <b>• Video Call / MnG</b>
+                </div>
+                <div class="slot slot-top mobile-bottom">
+                    <b>Top Video Call / MnG:</b><br>
+                    ${Array.isArray(topVCMembers) ? topVCMembers.join('<br>') : topVCMembers}
+                </div>
+                <div class="slot slot-total mobile-bottom">
+                    <b>Total Video Call / MnG:</b><br>
+                    ${data?.data?.videoCall?.totalTickets ?? 0} tiket
+                </div>
             </div>
-            <div class="col-md-6 mobile-spacing">
-                <b>• Two Shot / MnG</b><br>
-                ${(data.data.twoShot.totalTickets) ? `
-                <b>Top Two Shot / MnG:</b><br>${Array.isArray(top2SMembers) ? top2SMembers.join('<br>') : top2SMembers}<br><br>
-                <b>Total Two Shot / MnG:</b><br>${(data.data.twoShot.totalTickets) ? `${data.data.twoShot.totalTickets} tiket` : data.data.twoShot} 
-                ` : data.data.twoShot}
+
+            <div class="col-md-6 mng-column">
+                <div class="slot-title">
+                    <b>• Two Shot / MnG</b>
+                </div>
+                <div class="slot slot-top mobile-bottom">
+                    <b>Top Two Shot / MnG:</b><br>
+                    ${Array.isArray(top2SMembers) ? top2SMembers.join('<br>') : top2SMembers}
+                </div>
+                <div class="slot slot-total">
+                    <b>Total Two Shot / MnG:</b><br>
+                    ${data?.data?.twoShot?.totalTickets ?? 0} tiket
+                </div>
             </div>
         </div><br>
         <div class="poppins-font">
@@ -86,7 +115,6 @@ function createCard(data) {
         </div>
     `;
 
-    // Tambahkan event listener untuk Total Top-Up
     const totalTopUpElement = document.querySelector('.total-topup');
     totalTopUpElement.addEventListener('click', () => {
         totalTopUpElement.classList.toggle('censored');
@@ -95,30 +123,28 @@ function createCard(data) {
 
 $(document).ready(function () {
     createCard(decode);
-    //setTimeout(() => createCanvasFromCard(), 100);
+    setTimeout(() => createCanvasFromCard(), 100);
 });
 
 function createCanvasFromCard() {
     const cardBody = document.querySelector('.card-body');
-    html2canvas(document.body, { 
-        useCORS: true, 
-        scale: window.devicePixelRatio,
-        //scrollY: -window.scrollY,
-        width: 1200, // Lebar yang diinginkan, misalnya lebar layar PC
-        height: 961, // Tinggi yang diinginkan, misalnya tinggi layar PC
-        windowWidth: 1200, // Lebar window yang diinginkan
-        windowHeight: 961 // Tinggi window yang diinginkan 
-    }).then(canvas => {
-        // Buat wrapper untuk tombol agar berada di tengah
+    html2canvas(document.body, {
+    useCORS: true,
+    allowTaint: false,
+    scale: window.devicePixelRatio,
+    scrollX: 0,
+    scrollY: 0,
+    windowWidth: 1300,
+    windowHeight: 1300
+})
+.then(canvas => {
         const buttonWrapper = document.createElement('div');
         buttonWrapper.classList.add('text-center');
 
-        // Buat tombol untuk download
         const downloadBtn = document.createElement('button');
-        downloadBtn.textContent = 'Download Image';
-        downloadBtn.classList.add('btn', 'btn-primary', 'mt-3');
+        downloadBtn.textContent = 'Screenshot';
+        downloadBtn.classList.add('btn', 'btn-light', 'mt-3');
 
-        // Tambahkan event listener ke tombol untuk mendownload canvas sebagai gambar
         downloadBtn.addEventListener('click', function() {
             const image = canvas.toDataURL('image/png');
             const link = document.createElement('a');
@@ -127,10 +153,7 @@ function createCanvasFromCard() {
             link.click();
         });
 
-        // Tambahkan tombol ke wrapper
         buttonWrapper.appendChild(downloadBtn);
-
-        // Tambahkan wrapper ke halaman, misalnya di bawah cardBody
         cardBody.appendChild(buttonWrapper);
     });
 }
