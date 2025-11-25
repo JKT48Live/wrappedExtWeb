@@ -22,16 +22,17 @@ function toggleTopUpVisibility() {
 }
 
 function toArray(v) {
-  return Array.isArray(v) ? [...v] : v ? [v] : [];
+    return Array.isArray(v) ? [...v] : "—";
 }
 
 function createCard(data) {
     data = JSON.parse(data);
     const cardBody = document.querySelector('.card-body');
-    let topSetlists  = toArray(data?.data?.theater?.topSetlists);
-    let mostApplied  = toArray(data?.data?.theater?.mostApplied);
-    let topVCMembers = toArray(data?.data?.videoCall?.topMembers);
-    let top2SMembers = toArray(data?.data?.twoShot?.topMembers);
+    const topSetlists  = toArray(data?.data?.theater?.topSetlists);
+    const mostApplied  = toArray(data?.data?.theater?.mostApplied);
+    const topVCMembers = toArray(data?.data?.videoCall?.topMembers);
+    const top2SMembers = toArray(data?.data?.twoShot?.topMembers);
+    const topEvents = toArray(data?.data?.events?.lastEvents);
     const isAlltime = (isNumeric(data.year)) ? false : true;
     const selectedYear = (!isAlltime) ? ` ${data.year}` : `<br/>${data.year}`;
     const yearList = data.data.years;
@@ -111,9 +112,9 @@ function createCard(data) {
         </div><br>
         <div class="poppins-font">
             <b>• Events</b><br>
-            ${(data.data.events.lastEvents) ? `
-            <b>Last Events:</b><br>${Array.isArray(data.data.events.lastEvents) ? data.data.events.lastEvents.map(event => `- ${event}`).join('<br>') : data.data.events}<br><br>
-            ` : data.data.events+"<br><br>"}
+            <b>Last Events:</b><br>
+            ${Array.isArray(topEvents) ? topEvents.join('<br>') : topEvents}
+            <br><br>
             <b>Total Top-Up:</b><br><span class="total-topup censored">${data.data.topUp}</span><br><br>
             <center><small><b>#JKT48Wrapped made with ❤️ by JKT48 Live</b></small></center>
         </div>
