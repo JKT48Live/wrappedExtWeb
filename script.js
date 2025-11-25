@@ -21,13 +21,17 @@ function toggleTopUpVisibility() {
     }
 }
 
+function toArray(v) {
+  return Array.isArray(v) ? [...v] : v ? [v] : [];
+}
+
 function createCard(data) {
     data = JSON.parse(data);
     const cardBody = document.querySelector('.card-body');
-    let topSetlists = [...(data?.data?.theater?.topSetlists ?? [])];
-    let mostApplied = [...(data?.data?.theater?.mostApplied ?? [])];
-    let topVCMembers = [...(data?.data?.videoCall?.topMembers ?? [])];
-    let top2SMembers = [...(data?.data?.twoShot?.topMembers ?? [])];
+    let topSetlists  = toArray(data?.data?.theater?.topSetlists);
+    let mostApplied  = toArray(data?.data?.theater?.mostApplied);
+    let topVCMembers = toArray(data?.data?.videoCall?.topMembers);
+    let top2SMembers = toArray(data?.data?.twoShot?.topMembers);
     const isAlltime = (isNumeric(data.year)) ? false : true;
     const selectedYear = (!isAlltime) ? ` ${data.year}` : `<br/>${data.year}`;
     const yearList = data.data.years;
