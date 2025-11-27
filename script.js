@@ -139,8 +139,8 @@ function createCanvasFromCard() {
     scale: window.devicePixelRatio,
     scrollX: 0,
     scrollY: 0,
-    windowWidth: 1300,
-    windowHeight: 1300
+    windowWidth: 1500,
+    windowHeight: 1500
 })
 .then(canvas => {
         const buttonWrapper = document.createElement('div');
